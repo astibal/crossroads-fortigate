@@ -1,0 +1,6 @@
+#!/bin/sh
+
+FORTIGATE_AUTH_HOST="10.1.0.1" \
+FORTIGATE_AUTH_PORT="1000" \
+FORTIGATE_AUTH_PROTO="http" \
+python3 buffet.py
