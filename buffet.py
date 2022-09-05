@@ -116,18 +116,22 @@ def input():
         # I used in my case (solely for testing purposes) my [raok](https://github.com/astibal/raok)
         #       testing RADIUS server. You can also pip it : `pip install raok`
 
-        return make_response(jsonify(
-            {
+        content = {
                 "redirect_url": fortigate_uri,
                 "redirect_method": "raw",
                 "redirect_code": 200,
                 "redirect_data_info": data,
-                "raw": magic_form_body,
+                "raw": magic_form_body.decode(),
             }
-        ))
+
+        resp = jsonify(content)
+        return make_response(resp)
 
     except KeyError as e:
-        print(str(e))
+        print("Key error: " + str(e))
+        return redirect("/error")
+    except Exception as e:
+        print("Generic exception: " + str(e))
         return redirect("/error")
 
 
